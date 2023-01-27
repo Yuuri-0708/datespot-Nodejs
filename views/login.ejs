@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <div class="navbar-nav">
+          <a class="nav-link" aria-current="page" href="/">ホーム画面</a>
+          <a class="nav-link" href="/friends">みんなのデートスポット</a>
+          <a class="nav-link" href="/mypage">マイページ</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light p-4 p-lg-4 my-4 rounded">
+      <h1 class="display-4 text-center"><%= title %></h1>
+    </div>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <p class="fw-bold" style="color: red;"><%- content %></p>
+            <form action="/login" method="POST">
+                <div class="mb-3 form-group">
+                    <label for="email" class="form-label">メールアドレス : </label>
+                    <input type="text" class="form-control" name="email">
+                 </div>
+                <div class="mb-3 form-group">
+                    <label for="password" class="form-label">パスワード : </label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <div class="text-center mt-3">
+                    <input type="submit" class="btn btn-primary" value="ログイン">
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="text-center mt-3">
+        <a href="/register">新規登録はこちら</a>
+    </div>
+
+  </body>
+</html>

@@ -1,3 +1,13 @@
 body {
   background-color: rgba(255, 192, 203, 0.5)
 }
+
+.image-mini {
+  width: 80%;
+  height: 200px;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 5%;
+}

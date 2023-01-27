@@ -12,12 +12,39 @@
           <a class="nav-link" aria-current="page" href="/">ホーム画面</a>
           <a class="nav-link active" href="/friends">みんなのデートスポット</a>
           <a class="nav-link" href="/mypage">マイページ</a>
+          <a class="nav-link" href="/logout">ログアウト</a>
         </div>
       </div>
     </div>
 
     <div class="bg-light p-4 p-lg-4 my-4 rounded">
       <h1 class="display-4 text-center"><%= title %></h1>
+    </div>
+
+
+    <% var num = 0 %>
+    <div class="row">
+      <% for(var i in content) { %>
+        <% var obj = content[i] %>
+        <div class="col-4 offset-2 bg-light">
+          <p><%= num = num + 1 %></p>
+          <% if(obj.image_directory) { %>
+            <img class="image-mini mx-3" src="<%= obj.image_directory %>" alt="画像があります">
+          <% } else { %>
+            <img class="image-mini mx-3" src="images/place_image/no_image.jpg" alt="画像がありません">
+          <% } %>
+        </div>
+        <div class="col-4 bg-light">
+          <p class="mt-5 fw-bold"><%= obj.createdAt %></p>
+          <p class="fw-bold">場所名 : <%= obj.place %> (<%= obj.prefectures %>)</p>
+          <p style="color: red;">[おすすめポイント]</p>
+          <p><%= obj.comment %></p>
+        </div>
+        <p></p>
+      <% } %>
+    </div>
+    <div class="col-1 offset-11">
+      <button class="btn btn-secondary add-button" onclick="location.href='/mypage/add'">投稿する</button>
     </div>
 
   </body>

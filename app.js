@@ -2,13 +2,26 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var friendRouter = require('./routes/friends');
 var mypageRouter = require('./routes/mypage');
+var registerRouter = require('./routes/register');
+var loginRouter = require('./routes/login');
+const { title } = require('process');
 
 var app = express();
+
+var session_opt = {
+  secret: 'keyboard cat', 
+  resave: false, 
+  saveUninitialized: false, 
+  cookie: { maxAge: 60 * 60 * 1000 }
+};
+
+app.use(session(session_opt));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -16,13 +29,22 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/friends', friendRouter);
 app.use('/mypage', mypageRouter);
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
+
+//ログアウト処理
+app.get('/logout', (req, res) => {
+  req.session.login = undefined;
+
+  res.render('index', { title: 'ホーム画面' });
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
