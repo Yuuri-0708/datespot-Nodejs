@@ -1,5 +1,5 @@
 # datespot-Nodejs
 
-`npm install`
+$ npm start
 
 
