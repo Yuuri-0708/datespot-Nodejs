@@ -64,17 +64,7 @@ router.post('/add', uploader.single('place_image'),function(req, res, next){
         db.sequelize.sync()
             .then(() => db.Comment.create(form))
             .then(usr => {
-                db.Comment.findAll({
-                    where: {
-                        userId: req.session.login['id']
-                    }
-                }).then(coms => {
-                    var data = {
-                        title: 'マイページ', 
-                        content: coms
-                    }
-                    res.render('mypage', data);
-                })
+                res.redirect('/mypage');
             })
             .catch(err => {
                 var data = {
@@ -82,6 +72,7 @@ router.post('/add', uploader.single('place_image'),function(req, res, next){
                     form: form, 
                     err: err
                 }
+                console.log("動作が異常です");
                 res.render('mypage/add', data);
             })
     } else {

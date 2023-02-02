@@ -16,7 +16,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next){
-    hash_password = bcrypt.hashSync(req.body.password, saltRounds);
+    hash_password = '';
+    if(req.body.password){
+        hash_password = bcrypt.hashSync(req.body.password, saltRounds);
+    } 
     const form = {
         name: req.body.name, 
         email: req.body.email,
